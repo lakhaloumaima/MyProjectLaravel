@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +19,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::view('/home','home') ;
+Route::get('/home','HomeController@index')->name('home') ;
+
+Auth::routes() ;
+
+Route::get('/profile', 'ProfileController@index')->name('profile');
+
+Route::get('/profile/update', 'ProfileController@update')->name('profile.update');
+
+Auth::routes() ;
 
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::get('/home', 'HomeController@index')->name('home');
