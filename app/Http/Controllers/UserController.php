@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Profile  ;
 
-class ProfileController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,20 +14,7 @@ class ProfileController extends Controller
     public function index()
     {
         //
-        $user = Auth::user() ;
-        $id = Auth::id() ;
-        if ($user->profile == null)
-        {
-            $profile = Profile::create([
-                'province'=>'ok',
-                'user_id'=>$id  ,
-                'gender'=>'male',
-                'bio'=>'hello',
-                'facebook' => 'www.facebook.com'
-            ]) ;
-        }
-        return view('users.profile')->with('user', $user) ;
-     }
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -81,33 +66,9 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         //
-            $this->validate($request , [
-                'name'=>'required' ,
-                'province'=>'required',
-                'gender'=>'required',
-                'bio'=>'required',
-                'facebook' => 'required'
-            ]) ;
-
-            $user = Auth::user() ;
-            $user->name = $request->name ;
-            $user->profile->province = $request->province ;
-            $user->profile->gender = $request->gender ;
-            $user->profile->bio = $request->bio ;
-            $user->profile->facebook = $request->facebook ;
-
-            $user->profile->save() ;
-
-            if($request->has('password'))
-            {
-                $user->password = bcrypt($request->password) ;
-
-                $user->profile->save() ;
-            }
-            return redirect()->back() ;
     }
 
     /**
