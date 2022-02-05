@@ -13,7 +13,7 @@ class PostController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -57,7 +57,7 @@ class PostController extends Controller
         ])  ;
         $photo = $request->photo;
         $newPhoto = time().$photo->getClientOriginalName();
-        $photo->move('uploads/posts'.$newPhoto) ;
+        $photo->move('uploads/posts' , $newPhoto) ;
 
         $post = Post::create([
             'user_id' =>  Auth::id(),
@@ -110,15 +110,16 @@ class PostController extends Controller
         $post = Post::find($id) ;
         $this->validate($request , [
             'title' => 'required' ,
-            'content' => 'required'  ,
-            'photo' => 'required|image'
+            'content' => 'required'
         ])  ;
+
+        //dd($request->all()) ;
 
         if($request->has('photo'))
         {
             $photo = $request->photo;
             $newPhoto = time().$photo->getClientOriginalName();
-            $photo->move('uploads/posts'.$newPhoto) ;
+            $photo->move('uploads/posts' , $newPhoto) ;
             $post->photo ='uploads/posts/'.$newPhoto ;
         }
 
