@@ -42,7 +42,16 @@ Route::get('/post/restore/{id}', 'PostController@restore' )->name('post.restore'
 Route::get('/posts/trashed', 'PostController@postsTrashed' )->name('posts.trashed');
 
 
-////
+    // Routes for Tags
+    Route::get('/tags', 'TagController@index' )->name('tags');
+    Route::get('/tag/create', 'TagController@create' )->name('tag.create');
+    Route::post('/tag/store', 'TagController@store' )->name('tag.store');
+    Route::get('/tag/show/{slug}', 'TagController@show' )->name('tag.show');
+    Route::get('/tag/edit/{id}', 'TagController@edit' )->name('tag.edit');
+    Route::post('/tag/update/{id}', 'TagController@update' )->name('tag.update');
+    Route::get('/tag/destroy/{id}', 'TagController@destroy' )->name('tag.destroy');
+
+
 
 
 
