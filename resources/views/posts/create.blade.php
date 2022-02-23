@@ -33,7 +33,11 @@
               <input type="text" name="title" class="form-control"   >
             </div>
             <div class="form-group">
-              
+                @foreach ($tags as $item)
+                <input type="checkbox" name="tags[]"
+                   value="{{$item->id}}"  >
+                   <label for="">{{$item->tag}}</label>
+                @endforeach
 
               </div>
             <div class="form-group">
